@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WB Capital Limited — Real Estate &amp; Finance Research</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bone:#F2EEE4;
+    --bone-2:#EAE4D6;
+    --ink:#16201B;
+    --ink-soft:#3A453E;
+    --green:#1E4036;
+    --green-deep:#142B25;
+    --brass:#A88A4C;
+    --line:rgba(22,32,27,.14);
+    --serif:"Fraunces",Georgia,serif;
+    --sans:"Hanken Grotesk",system-ui,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--sans);
+    background:var(--bone);
+    color:var(--ink);
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;
+    opacity:.035;mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px}
+  a{color:inherit;text-decoration:none}
+
+  /* NAV */
+  nav{
+    position:sticky;top:0;z-index:100;
+    backdrop-filter:blur(8px);
+    background:rgba(242,238,228,.82);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:74px}
+  .brand{font-family:var(--serif);font-weight:600;font-size:21px;letter-spacing:.01em;display:flex;align-items:center;gap:11px}
+  .brand .mark-img{height:26px;width:auto;display:block}
+  .foot-logo{height:40px;width:auto;display:block;margin-bottom:14px}
+  .nav-links{display:flex;gap:34px;font-size:14px;font-weight:500}
+  .nav-links a{position:relative;color:var(--ink-soft);transition:color .25s}
+  .nav-links a:hover{color:var(--ink)}
+  .nav-links a::after{content:"";position:absolute;left:0;bottom:-5px;width:0;height:1px;background:var(--green);transition:width .3s}
+  .nav-links a:hover::after{width:100%}
+  @media(max-width:760px){.nav-links{display:none}}
+
+  /* HERO */
+  .hero{padding:120px 0 90px;position:relative}
+  .hero .eyebrow{
+    font-size:12.5px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--green);margin-bottom:30px;
+    opacity:0;animation:rise .9s .1s forwards;
+  }
+  .hero h1{
+    font-family:var(--serif);font-weight:400;
+    font-size:clamp(48px,8vw,104px);line-height:.98;letter-spacing:-.015em;
+    max-width:14ch;
+  }
+  .hero h1 .ln{display:block;overflow:hidden}
+  .hero h1 .ln span{display:block;transform:translateY(110%);animation:slideUp 1s forwards;}
+  .hero h1 .ln:nth-child(1) span{animation-delay:.18s}
+  .hero h1 .ln:nth-child(2) span{animation-delay:.30s}
+  .hero h1 em{font-style:italic;color:var(--green)}
+  .hero .lede{
+    margin-top:38px;max-width:50ch;font-size:18.5px;line-height:1.62;color:var(--ink-soft);
+    opacity:0;animation:rise .9s .65s forwards;
+  }
+  .hero .cta-row{margin-top:42px;display:flex;gap:18px;align-items:center;opacity:0;animation:rise .9s .8s forwards;flex-wrap:wrap}
+  .btn{
+    display:inline-flex;align-items:center;gap:9px;
+    background:var(--green);color:var(--bone);
+    padding:14px 26px;font-size:14.5px;font-weight:600;border-radius:2px;
+    transition:transform .25s,background .25s;
+  }
+  .btn:hover{background:var(--green-deep);transform:translateY(-2px)}
+  .btn .arr{transition:transform .25s}
+  .btn:hover .arr{transform:translate(3px,-3px)}
+  .btn-ghost{color:var(--ink);font-weight:600;font-size:14.5px;border-bottom:1px solid var(--green);padding-bottom:2px;transition:color .25s}
+  .btn-ghost:hover{color:var(--green)}
+
+  .hero-meta{
+    margin-top:88px;display:flex;gap:54px;flex-wrap:wrap;
+    border-top:1px solid var(--line);padding-top:28px;
+    opacity:0;animation:rise .9s 1s forwards;
+  }
+  .hero-meta div{display:flex;flex-direction:column;gap:5px}
+  .hero-meta .k{font-family:var(--serif);font-size:28px;color:var(--green)}
+  .hero-meta .v{font-size:13px;color:var(--ink-soft);letter-spacing:.02em}
+
+  /* SECTION SHELL */
+  section{padding:108px 0}
+  .sec-head{display:flex;align-items:baseline;gap:18px;margin-bottom:58px}
+  .sec-num{font-family:var(--serif);font-size:15px;color:var(--brass)}
+  .sec-title{font-family:var(--serif);font-weight:400;font-size:clamp(30px,4.4vw,48px);line-height:1.02;letter-spacing:-.01em;max-width:18ch}
+  .sec-title em{font-style:italic;color:var(--green)}
+
+  /* CAPABILITIES */
+  #work{background:var(--bone-2)}
+  .caps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line)}
+  .cap{
+    padding:42px 30px 48px;border-bottom:1px solid var(--line);
+    border-right:1px solid var(--line);position:relative;
+  }
+  .cap:nth-child(3n){border-right:none}
+  .cap:first-child{border-left:1px solid var(--line)}
+  @media(max-width:860px){
+    .caps{grid-template-columns:1fr}
+    .cap,.cap:first-child{border-left:none;border-right:none}
+  }
+  .cap .ix{font-family:var(--serif);font-size:14px;color:var(--brass);margin-bottom:26px}
+  .cap h3{font-family:var(--serif);font-weight:500;font-size:25px;margin-bottom:14px;letter-spacing:-.01em}
+  .cap p{font-size:15px;line-height:1.6;color:var(--ink-soft)}
+  .cap ul{list-style:none;margin-top:20px;display:flex;flex-direction:column;gap:9px}
+  .cap li{font-size:13.5px;color:var(--ink-soft);padding-left:18px;position:relative}
+  .cap li::before{content:"";position:absolute;left:0;top:8px;width:6px;height:6px;border:1px solid var(--green);border-radius:50%}
+
+  /* COVERAGE */
+  .cov-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:54px}
+  @media(max-width:860px){.cov-grid{grid-template-columns:1fr;gap:36px}}
+  .cov-lead{font-size:17px;line-height:1.65;color:var(--ink-soft);max-width:42ch}
+  .cov-lead strong{color:var(--ink);font-weight:600}
+  .sectors{display:flex;flex-direction:column}
+  .sector{
+    display:flex;align-items:baseline;justify-content:space-between;
+    padding:20px 0;border-bottom:1px solid var(--line);
+    transition:padding-left .3s,color .3s;
+  }
+  .sector:first-child{border-top:1px solid var(--line)}
+  .sector:hover{padding-left:14px}
+  .sector .nm{font-family:var(--serif);font-size:21px}
+  .sector .tag{font-size:12.5px;letter-spacing:.04em;color:var(--ink-soft);text-transform:uppercase}
+  .sector:hover .nm{color:var(--green)}
+
+  /* APPROACH */
+  #approach{background:var(--green-deep);color:var(--bone)}
+  #approach .sec-num{color:var(--brass)}
+  #approach .sec-title{color:var(--bone)}
+  #approach .sec-title em{color:#9CC4B2}
+  .app-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:8px}
+  @media(max-width:860px){.app-grid{grid-template-columns:1fr;gap:32px}}
+  .app{border-top:1px solid rgba(242,238,228,.2);padding-top:24px}
+  .app h4{font-family:var(--serif);font-weight:500;font-size:20px;margin-bottom:12px;color:#E9E2D2}
+  .app p{font-size:14.5px;line-height:1.62;color:rgba(242,238,228,.72)}
+
+  /* ABOUT */
+  .about-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:64px;align-items:start}
+  @media(max-width:860px){.about-grid{grid-template-columns:1fr;gap:36px}}
+  .about p{font-size:17px;line-height:1.7;color:var(--ink-soft);margin-bottom:20px}
+  .about p strong{color:var(--ink);font-weight:600}
+  .about-card{border:1px solid var(--line);padding:32px;border-radius:3px;background:rgba(255,255,255,.25)}
+  .about-card .lbl{font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--brass);margin-bottom:8px}
+  .about-card .row{padding:15px 0;border-bottom:1px solid var(--line)}
+  .about-card .row:last-child{border-bottom:none;padding-bottom:0}
+  .about-card .row .t{font-family:var(--serif);font-size:17px;margin-bottom:3px}
+  .about-card .row .d{font-size:13.5px;color:var(--ink-soft)}
+
+  /* CONTACT */
+  #contact{background:var(--bone-2);text-align:center;padding:128px 0}
+  #contact h2{font-family:var(--serif);font-weight:400;font-size:clamp(34px,5.5vw,62px);line-height:1.05;letter-spacing:-.015em;margin-bottom:24px}
+  #contact h2 em{font-style:italic;color:var(--green)}
+  #contact p{font-size:17px;color:var(--ink-soft);max-width:46ch;margin:0 auto 38px}
+  .mail{font-family:var(--serif);font-size:clamp(20px,3vw,28px);color:var(--green);border-bottom:1px solid var(--green);padding-bottom:4px;transition:opacity .25s}
+  .mail:hover{opacity:.65}
+
+  /* FOOTER */
+  footer{background:var(--ink);color:var(--bone);padding:56px 0 40px}
+  .foot-top{display:flex;justify-content:space-between;align-items:flex-start;gap:40px;flex-wrap:wrap;padding-bottom:38px;border-bottom:1px solid rgba(242,238,228,.16)}
+  .foot-brand{font-family:var(--serif);font-size:24px}
+  .foot-brand span{display:block;font-family:var(--sans);font-size:12.5px;color:rgba(242,238,228,.55);margin-top:8px;max-width:34ch;line-height:1.5}
+  .foot-cols{display:flex;gap:64px;flex-wrap:wrap}
+  .foot-col h5{font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--brass);margin-bottom:16px}
+  .foot-col a,.foot-col p{display:block;font-size:14px;color:rgba(242,238,228,.7);margin-bottom:10px;transition:color .2s}
+  .foot-col a:hover{color:var(--bone)}
+  .foot-bot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;padding-top:26px;font-size:12.5px;color:rgba(242,238,228,.5);line-height:1.6}
+  .foot-bot .disc{max-width:62ch}
+
+  /* ANIM */
+  @keyframes slideUp{to{transform:translateY(0)}}
+  @keyframes rise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:translateY(0)}
+  .reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}.reveal.d3{transition-delay:.24s}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-in">
+    <a href="#top" class="brand"><img class="mark-img" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOkAAAB/CAYAAAAKCOW9AAABCGlDQ1BJQ0MgUHJvZmlsZQAAeJxjYGA8wQAELAYMDLl5JUVB7k4KEZFRCuwPGBiBEAwSk4sLGHADoKpv1yBqL+viUYcLcKakFicD6Q9ArFIEtBxopAiQLZIOYWuA2EkQtg2IXV5SUAJkB4DYRSFBzkB2CpCtkY7ETkJiJxcUgdT3ANk2uTmlyQh3M/Ck5oUGA2kOIJZhKGYIYnBncAL5H6IkfxEDg8VXBgbmCQixpJkMDNtbGRgkbiHEVBYwMPC3MDBsO48QQ4RJQWJRIliIBYiZ0tIYGD4tZ2DgjWRgEL7AwMAVDQsIHG5TALvNnSEfCNMZchhSgSKeDHkMyQx6QJYRgwGDIYMZAKbWPz9HbOBQAAAZ+UlEQVR4nO2deZRV1ZWHv5qAKMqgBhUHIiWiKQUHQHFIEDWkHRrtdkqrrR1jd9JxSKcz9GrTK53+w7Zjd1aiy9YMztFWMQ4oCsqgHUUGlUkEbaVQHABBQEYLqvqP/W7q1uPd8+6w973nlXxrvfXq1X117qn37r7nnH32/u26vqMuA9gX6AD6AJsROoAddNIO1IWe60PPYRqANqAX8DHwKd2fvsDuwN7A+tLv6kqP4OeO0s+fAXshn0sD0APYWHq9Np/udmEgsBX5HuuBRqSvQX/bS88NpectQFPpfXXA9tLvg/+xEXi/yjkHIZ9Tv9Lrnsh1F1w75ecm9Lox1n/V9W/KX3eE+t2O/P9bErabG43IBfYt4BI6P4AOpPOBkbaHnjvY2UjDhvoZ8iVuBh4Gbqb7G+p/ACcBByM3p+AzChtqwObSe9qQi5PSz0uAs4HlOfQ3zD3Afsh3tp2db7rltCP9/gwxqnZgE3Kz6Vlq7yaiL/qDkOuiJzAA+d+DdvcANpRe76DroBC87nA8U+pTR+j3lL1vVen/3Fbq92qgFVgKfFB63kTnYFU4jUhndgBDDNrfHZgHTDJo2xcagfORm10cdis99wz9rgk4Ehlh8zbSU5Xb27fK8ROB4xzH++p1pSJfivm+VuBl4EXgJeBVqw5Vox65Iz5s1P6hwFijtn3hOPQurDFUH8k0KR/lNZhP9Cg6EDjN4JwWDAIuQmaCUxGDfQiZcVa7EakSXBCtwEdG5/gz8r3w8ub7im2dARyu2F41Oqq/JRGvAXMcxw8FxiufMw/6AqOQGdPNwB+AXwEXI1N2UwLjacNuND0MGGrUtg+cpdjWV5DRplZ5AVjhOH4I0D+nvljRFzgBuBpZe/8MGXH3szpheIT7T6Nz1AFXGLVdNEcgTiAtegLHKLaXNxMQR0wl6ul+S5/9gauABxDn4dcsThI20uXAXIuTAOOM2i2a0QZtDka+/FpkpePYqYgHvLtyCfAM8EuUZ0Pla8VnNBsP0YJcfN2J3sAFBu2Oxsb4rbkb91T3TGT7pbtzDXA/cK5Wg+VGOh14R6vxMs6mc0O8OzAQON2g3SOAow3ateYhor26TcCIHPtSNKcA9wE/RmE5VG6kLwFvZG00gm9S+06DMEcYtn2oYdtW/NFx7C+x2Yf3md2AGxBfz55ZGio30q1I8IEFLUhETndgb2RP04ohwFGG7Wszmc5IoUr8BbBPTn3xje8A/0iGvfRK+5fTgTfTNliF05DwsVqnBZm+W3EE8HXD9rX5TZXjJ+TSC3/5CfBzkscdA5WNdC6wIEuPHHyd2vVchhlUeljRhDt0zidWAk85jg+he3znWbkSGVETU8lI1wPTMnUnmlOwcbbkST0yklozLIdzaPAEskyK4h/y6kgNcAPw90n/KCpcrxW7LIADsYkZzYujkGB4awYCX83hPFlYC8x2HN8dOCenvtQKlwInJ/mDKCNdDDyeuTuVGUVtr1G+Sj7GsxuyQe4z85Hg8yiGYxguV6OMQpxJe8T9gygjXQ5M0ehRBU5DOlqrDCM/55fvo9ACYJnjeHeNNMvKeGRbKhau7BTXNCYL9dTmZj3AF8k3cmof/N0z3YSMpFEcgP8zgaLohWRPfSHOm11G2orsf1lwNPIl1honkX94o69bMXNwG+lB2HrAa50vA+fFeaPLSDcDd6h0Z2daqM28wq+R/3bCRcgI7hvPE61W0IhtsMeHyJJsE7AG2QZaj2TgrC091pUeG0rH1uMOuCiC79Gp1BFJtc1VS9mTMcAthu1bUEQa2QmIp3dVAed24cqYGoHdVtv1wETgXSTMdCud+kjb6dRECovkhQejHohh7IXMioYjebxFLCuORUZUV6J8VSPdiCSDn6/UqTCjkQ+2VkTKDkM+0CI4BlE98IWJuB1G+yAXvjYfIHv4QbDNutCxtMoieyM3wRHIwHER+SqJnAksxLHXHKczv1frTlf2pXb0bkC2XWIt9A04nk75Sx9YALztOG4V7PEI+iGrHyNr698iqpkXA08qn8PFeVSJa45jpI9jlxnzV0btWmCROxqXM7DNuknKHKLv/Ech/bVgKrIGtWIzknJ3HfADZEptzZGIrEwkcYd1q1jec5CoFN/pg770ZRIOwh8jXVR6RDEKke204D2jdst5G9Evugr3jEEL545BXCN9CpswwSbsvlBNji26A+QTLxyH23FfuKNIme0R47x5axJPRoIOrGSFAo7CkcoW10gnYRfccD7FrfXi0ICuImBahiHOq6KZ6Dh2OHYKDA9iO9WNYh6isOBylGVlGBLTXpG4RroGu2TwS/Bb/6gZ8fgVzbEUH075Du7R7FzsktUXGrUbh6nArw3bb0a8zBVJ4mpeRLRcYxZ64XdkykH4ESTem+LVGp6vctwqVnca4oUtkulU///T0heHFlISI32GKpuuGfhz7GuApKEBv/I6h2Gz3otDG+7RZDB2wR63GbWbhFm4M36y0BuHDlISI30fqYdhwen44xgJMwi/0uoOpjjVvVdwf//jsPHUt2I3giXFapcDHJlVSSMrZmXsSBQHAyON2s7CUKSWjS8UWUvlpSrHLzM670z8CYlsxc43ExnDm9RI38burnYcCRJhc+JQdMtIaFDEfu1HuPOL98bmJrsduylmGlYhMwoLekYdSGqky4DHMnUlGsug7DT0orhYXRctZNRxTcFM3GmLVuGd8/Grtu2H2EUhRdpiUiNtx25d2kxC7RdjjsGPIIZyehEzD1ERV95ofyTe1YJXEMPwifVG7bZFHUgT7b8Mu8CGY/FH5X40/ipIXJnjuRYjI2kUh2Mj87IW2fbwDZcyYha2RR1IY6QbsMsSaCbfIrouhhfdAQcnkl+U1nO4HYZWVQlexG4wyMJ2o3Y/izqQxki3YBd9sR9+iG814+dUN8zxOZ1nHtFTvIORPW4L5mJXPCwtDdiUy+jAkQ+bNrl1JXalKKzSnJJwMv5XJz8V+9F0DW5HyZEYFc4Flhi1m4W+2FRiX4ZM7yuSJQP9dxn+1sVwio/l9SGgvhoXYK999DTwluP4MCSNT5uHsXNQZqEvNqGZc3GEPWYx0gcRISgLLjVqNy4We37aMjFDcGROKDGd6JH0AOxmG886zlskB2ET+jgTkYapSBYjXY7dxm6RRnoU+nKjq4H/Vm4TZN1sWbLDFas9Grtc4HlG7WZlJBJnq81rKDuOwkwGdmRsoxKH4EjdMcZCdG0yNh7x07DLIJqEhMFFcQzwJYPzvoxt7mZaDsSm0t0GYIXrDVmN9DHs8vwuppjCTucqt/cBUnnsTSRJQZNx2CWC30H0FH0P7NLmfkPxaWmVOAubkMwHqRKwkdVIFwP/l7GNKK4i/8rgFqGAs5F9xvVIup8mjditS591HLMURrOqQZSFAUi1cotAm8epIk2koS/qChnLQgv5K7dblHRYgDhBtiI6PdqMRn+d9CRutfcLsbmBLqLK1K8A9gJ+ik0lvQ3EiKrSMNLngP9VaKcSJ5CfUHEfbLZeloZ+fgvZuNZkOPqJ6Q86jjVh59V92KjdtOyFFP39OySQQZvbiCHwp2EAL2O3p3Ue+YlvDSBBObqYTKbrTGMdIvCsyXB0o4+WAfc5jo/FJnRzG3ZC7Gk4Evgn4F+N2l8N/DzOG7VGKSvx7FPIT292IPopYFPoOpIC3KN8DtDd163mCLwQGwmXmeSjcRuHk4EJSHlCKx4gpoNMy0hnY7c2zUMhrxEbWZJZ7ByQ/RzwifJ5jkBHLG0b7vzNJuyqDvzBqN241CF+kBnAC0iwiBVTgFvjvlnLSJciIWQWjMZe/2gI+kp3i6gsf7kF/eJLh6JTanAJ7un4iYihajMb2aYqguOBf0FG8oXYFJoKsw64m51nWJFoTVu2A39UaqucE5EPzlXaICst6NfTfIRoMeep6O659US0mO7P2M5MoqdgTcDlGduP4lXcer5HIkuRHXSWNgwIXgcOufrS79pDr3uUHvVIhlN/JJtlcKlti6CMKG5EptKx0VxbvIpEqAxSbDPAOm3MWTAnJdORUbMSc5EgB82CxBrLApca3oHYpaW5gvibgWuQaJ86xMsaGGRgjB10GmUdXeuU1iPZQj2RG01vbNLN4nAHcCeOEMBKaBrpZ0hR4JsU2wwYgUxJLdLj9sVGttOVKD0FcZJoGuleyIWctm7Ji7j7fDg22siTkA39KA4jXyUKK+4HfkiKUhmae5BrsFMSPAy7JOcj0V/zvkx1mQ3t5IR+ZEuYfwOZDVWiD3b6U65ap32Bk4zOmye3IrOBVLVstAMF5iIJ4do0Yad/ezL60927YrxnOvpVwr6R8P3hXFCXVMlh2E11XTerIcDZRufNi7uQiKXUxaYsonks9gFBvLyRKt8Z0M5s2Ea87YQ56JfUG0wy5YAgg+lZ3AEpw7CJMpqLe499KH7KqsahA7geuJaMNZQsjDSrhzGKA9HfJhmK/lR3MfG+lA/R34qBZDGmG0vPE4kOYuiFXamNiUT7GZqwqy1jzVvA3wK/wB0DHQsLI52HXQTS5crtjUE/i8SVPVLO68i+mSbjSJatsYzotSjImtAquXs20XqzLdjkb1rzKHAdknKnUnjbKnj9UaN2z8VRMyMF2gH17+IuslvO6+inr41HZD7i8lCpH1GMwSb6Zinum/mJ+FUsKw6TgJ+grLpvZaRTsUvc1VyjaIccLsc9KpWzDP1ykr1Jtlf9IO7R3Eog/AHcSfDDyS8DSotVGJQAsfoQpmEnbPx9dBQbvoF+HuZckk1xtpNsehyXscQvQ+haF5+CXVra/UQLTY+k+KrmabgcqT43GUWpU8s7lZVI2Th0tkxG46hklYJVJBtFA1ain/0xEonnzco52ITMLcHtXMsjXtuSM5DQv4eAM7M2ZmmkL2ATb9sHnTDBzB9eGa8h/3NSViFTP01GonORW1UTeAD3FNunmrBp6Y2I2v0SWaemTrm0NNLX0N8HDBiDhPOl5QD0Y4znkV4r9inFfgRkTcxuLj202YZbgWEwtecwcjEY+BlwMym3EC2NdA3ppn9xOIdsI8UpWh0JkWXPcyH6hYBayFYS4VJs1Brn4PbqXoiNtm3RnIpEHyVOJLf2ni3Aocydgf1J7+X9AvrTuFlk2xvehH6x3OFk88xa1UCdUeX45Ubn9YEBSALKf5EgucXaSJeQbN8wCceTTmn+YORurclk3OlWcUiUYxiDg0gfhDAIG8fNYtziAM3oOLx853skyBazNtKV2CkJHkc6N/0g5X6ArL2jckfj8gKOylopSaMiWI94Vy14B9miqEQTtbntkpZrkXVqVfLYLJ6NTeHVZpKvLQcCFyn3YyM6WyjL0Y/lbUZKUSRhb+AG5X4EzHAc2w2Rz/w88V1EqcEpSZOHkX6EnZ7q4ST7Hw5B/249Ab3yES+hq8vbTPJ8zBaShRXG5Q2iR1GQG+geBuf1nSuBy1xvsJBmLOdTpDL4xQZtHw2cjqwJ43AY+hE0dxJdCTspjyLav1q6tnXI5/PTmO/vTfKRNy7TcYdALgd+i0RKBULU9cgsLDwT66BT0yisbRS8rmfnG3f4/YFW0m7INt6BiG9jIDYC2NXoD/wYudFXjOPOw0hB1lvbDc63NxJQHsdI98AmN1Fzzf0a4mzTFJ9uQfJw4+jqHIFdpfVXcC97NiEb/0WxJ/L/n44I343N8dzNSO2jN5F1exfyCmBuR2QMLYiruteCvgTL8+iXjdAOp9yT+OUch2Ij+vYO7kwbH9iAJL7/GzKbaECqqbum6JqcS4SWU55ZBncZtTsE0Smqxgj0jVS7ZASIkWoXLYpTPqMRu3KGQenHWqId8aWMR25yFlFh5VxJBd3fPI30RWyUCACuiPEe7QtwNZKSp81c9AXdxiBBHC6Oxy65+1n0VfvzYjXiHLwG+DZ2pT5BpEavo8zbm6eRdmA35bmkyvE69PdHW5H1ozYfo1+YuQ/V43CHIVFK2rTh1vOtFd4BfofoFllE0QWMp+xazTup9jEk60ObfXCrBxyD/gU4iU5BZm3eQkEbp4xqSoInIXpG2txIp5ZSrdOGJMn/DZ0ibhb8KPwibyOdg43kJ7jjccci4tFafISUZLBiCfpT3rOI1j4agV31uufR13EqmilIaJ8VFxJSeMjbSN/Frpbpt5AA5kpoa7e+Qvy92TQsRj/muYXoZPnx2DiNPsGuRlCRdCAhfdrx1gG9CW3DFaEh8ww2d9YhVA7O3gP9KCPtNWMlXCUf0nIUldPPrAIYJlBdyb+WuZP0OcTVGEspuKIII30BG10fkMDwcjXBceiW61tBPnt+b5OgPF5MzmDnkL+h2OjbdiARRN2ZSdhleV2MBOsUYqQfUz2nMC3j2NmBpB1Q/zx2ihNhNqE/nTqdnTWLxmMTebYAOzE6n3gRm+2lFkoFsoqSTHwFmynvGLqG1PVFP8F7HjZbL5XQTkzoz86BH0nrx8RlhlG7vjETu/3/flCcka7ALs80PJIegP4oYbGFFMV8gzbDN7EexIvWSspK0omy1SKt6Ks9BuwHxRnp+8h+kwVjkY35JsTjq8k84DnlNqtxn3J7IxA1wTr0FSoC3iJe0aruglUU0hAoViG81ajdo5Fk8H3RD3ObhL56QjWmKbd3LLLe6YOdZKfFDMBnrAIbegM9ijTSt7CZEvVGnCHHo5/R8Sz5byk8iW4YWh1SeW0Y8QLvk7KG/GcbRWOhPAKSW7t7XvmklViFTOUs5DW/gnhHNWkD3lNuMw6rkXQpTYMaS3ZNpihmIR7PXWSnF9Cz6II4FqleIJvA2lFGt2JXhKoaM5Tb2x9JMrZgJhmL5tYgVnbUADQWbaRrySd6R4P70ZNJScoMaiMfcyufj73RcqqlAaalsIijcmLJGhbMDsSzWxSvk59CQBZ+j34pR99pBL5o1HY7sN0HI70P/fWjNi8STyPIEoviV9o8Te0md6dlAJIqaUEbnhjpFvS3GbS5vegOINPI1qI7UYW8IrF8YjB2ZRo3Ap/4YKTgd3TKOvy4iSzDNoc1K49TQenuc8CJ2GlDrQV2+GKkT5Gt4JElryNJ3kWzAr/jYW/HblvHV/ohSQtWvAd+OI5ADHRe0Z2IwKek5Tew1dfJgs+zISuuBk42bP8D8MdIwU6xIQsfIhE/vtCKX/0JmIL/zj9tDgG+ia3A/Drwy0hn49/deD5+bX28h583sweK7kDODADuwaZmTsA6pESLV0Y6H7v0tbTMwk4RMC2+BX98SD7C0b4wEimHYaVRHPACEgftlZFuwa9SBKuxS+bNwnL8Gk1f4fMRBrgPogV1PXYpfmEW4eF0F0SWxJc0p2n4GT2zGplq+cITRXcgB4YAPwTuQD8mPIq7gh+KzIKpxLtIjGyaCtXaLMBfT6ov+6WzEadRd2UAIgj2AyQpIS/WIPvigH8j6Tb88V76XBphHqEvsUBeRqbf3Ym9gPOQGcJHwC/I10BBMq7+lKPq20gKchdZhF2oVRxmI0npPvM08J0Cz7+Z6nvbJyO+hs1IRscOuhbqbUAcc/XsXBQ4TNh5V21gKdcVritrdxOSp9kXMcgDkDo5zYgxHg70rHIOSzYC94Z/4aORbkA6eWOBfZiIvuatNvchOaFFfYdTcTuwjkZq0tYhRrYZidBZT2c17vKK3cHP5SQx0jB1oeeg7QbkMwsePQmVdPCABykbIHw00i3IOqdII321wHPHZSaibpH3VCxgLtGhnP0QveNyjV+Qsve7qEwr4pzqgm9r0oAlFJea9Ql+rPfiUKRMiSvWen9EqHwXyXiICsEzvhrpVuzk+6txL7VjpFMopqzgU7jT5oZilxnSXXmOCqMo+GukIB6uIvg1tVNk6FmKyeGciAQxRDEyr450E9YCtxDhB/HZSFeQf9xsB7W1pbCcfOrSlLOA6HDJFvSr2HV3bkPycSvis5ECPJrz+Z6g9qpS5y38NQX39tQZiKTqLuJxK/Dvrjf4bqTTkADuvLgrx3NpkXemzv/gljY9Lq+OdAMmAP9MKdslCt+NdCH5xc+uRgoc1xqvkq+RTnIcG0WxQSi1xATgu8SoLui7kbZhU/G6Ei9TOw6jchbndJ75SMW0KM7Cpkpbd2MCcC3uz/JP+G6kIK7pPHIoa3EUDVhIPiUw7q5y3FLvp7twE3AlCZI3asFIZ2M/nVtCbdcvWQpMNj7HRtxpafuza6rrYhHw18CPSFgJoRaMFOyN9E38yWNNw6fYZw8twV0s99tIFbBddGUjouRwBaLwn1jpw8fY3UosLD2s1jvzjNrNE8vp7naqR4BdYHj+WuU5JEH/YTL4O2plJJ2PpGZZsIjanuoGvIncqS1Yinuk3p9SVepdAOKEvBqpNH8vGR2StWKk7cDzRm3PoTayXqqxETvVvsW4P6PTjM5bS7QhxjkKcaDdglJZkFqZ7oKMeCsRSQtN5lBc3VFtXiI6JzMtbbilVvshDpHPK4uR3N57kVBWdWrJSD9ERorrFNtcR/eqX/IJEkp5nmKbM3Gr+A8HTlU8n++0IvHS00rPryMJ7WbUkpG2IQvw6xTbnEG+YYd5MBtdI51DtN5TA3CM4rl8YSsSgbYK0TlajtzMVyMe7qXkOPuqJSMFmfM/AuyLaNR8RuddLFhf7yg919Ep0VH+cwMyTbsdvwXH0vAr4MvInmVb6XdbEImQDXTV7wm2A8JT5DZE+2cj4tWdSvS2QT/kwp0F9C/9TVDHtaP0d4G2UHgKXj4dL9c1KpdVCT9X28KI8rME5+hR6mMbIny3Dflc1iLX0obS4yNk+roCCTwoTCS9ru+oy4o6d1r2pKuxtYceHVS/8TQhX+Q2YsRN1jANSJn4Rrp+Rj2q/F0jcqPrQD6japXSetCpEbSNTgMMG15wgQc3y0porKUr/X35+YLvfgudN3Sv+X/P/gH6xwd/DAAAAABJRU5ErkJggg==" alt="WB Capital">WB&nbsp;Capital</a>
+    <div class="nav-links">
+      <a href="#work">Capabilities</a>
+      <a href="#coverage">Coverage</a>
+      <a href="#approach">Approach</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header id="top" class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Real Estate &amp; Finance Research</div>
+    <h1>
+      <span class="ln"><span>Research that sits</span></span>
+      <span class="ln"><span>under the <em>decision.</em></span></span>
+    </h1>
+    <p class="lede">WB Capital is an independent research venture working where real estate, digital infrastructure and the capital markets overlap. We produce the analysis that informs an investment decision: market research, due diligence and modelling, built on public sources and assumptions you can defend.</p>
+    <div class="cta-row">
+      <a href="#work" class="btn">View capabilities <span class="arr">↗</span></a>
+      <a href="#contact" class="btn-ghost">Get in touch</a>
+    </div>
+    <div class="hero-meta">
+      <div><span class="k">3</span><span class="v">Core research functions</span></div>
+      <div><span class="k">UK</span><span class="v">Primary market focus</span></div>
+      <div><span class="k">Public</span><span class="v">Source-led methodology</span></div>
+    </div>
+  </div>
+</header>
+
+<section id="work">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-num">01</span>
+      <h2 class="sec-title">What we <em>do</em></h2>
+    </div>
+    <div class="caps">
+      <div class="cap reveal">
+        <div class="ix">i</div>
+        <h3>Market Research</h3>
+        <p>Research notes on real estate and financial markets, tracking pricing, yields, capital flows and the macro drivers shaping them.</p>
+        <ul>
+          <li>Sector and submarket reviews</li>
+          <li>Rents, yields, take-up, vacancy, pipeline</li>
+          <li>Public sources: Land Registry, ONS, REIT reporting</li>
+        </ul>
+      </div>
+      <div class="cap reveal d1">
+        <div class="ix">ii</div>
+        <h3>Due Diligence</h3>
+        <p>Screening investments against return hurdles and risk factors to support clear buy, hold or exit reasoning.</p>
+        <ul>
+          <li>Financials and income security</li>
+          <li>Lease structure, covenant strength, WAULT</li>
+          <li>ESG factors including EPC and BREEAM</li>
+        </ul>
+      </div>
+      <div class="cap reveal d2">
+        <div class="ix">iii</div>
+        <h3>Modelling</h3>
+        <p>Valuation, DCF and development appraisal models, stress-tested to show where a deal holds and where it breaks.</p>
+        <ul>
+          <li>Cash flow and appraisal builds</li>
+          <li>Sensitivity on yield, growth and cost</li>
+          <li>Viability and return analysis</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="coverage">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-num">02</span>
+      <h2 class="sec-title">Where we <em>look</em></h2>
+    </div>
+    <div class="cov-grid">
+      <div class="reveal">
+        <p class="cov-lead"><strong>Digital infrastructure sits at the centre of what we follow</strong>, alongside the listed property and capital markets that price it. We focus where real estate and finance overlap, and where the fundamentals are moving rather than where the noise is loudest.</p>
+      </div>
+      <div class="sectors reveal d1">
+        <div class="sector"><span class="nm">Data centres</span></div>
+        <div class="sector"><span class="nm">Listed real estate</span></div>
+        <div class="sector"><span class="nm">Capital markets</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="approach">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-num">03</span>
+      <h2 class="sec-title">How we <em>work</em></h2>
+    </div>
+    <div class="app-grid">
+      <div class="app reveal">
+        <h4>Public sources only</h4>
+        <p>Every figure traces back to something a reader can verify: Land Registry, ONS, company reporting, regulator and agency data. No black boxes.</p>
+      </div>
+      <div class="app reveal d1">
+        <h4>Assumptions you can defend</h4>
+        <p>Models are only as good as the inputs behind them. We state assumptions plainly and stress-test them, so the conclusion holds up to a hard question.</p>
+      </div>
+      <div class="app reveal d2">
+        <h4>Reasoning, not noise</h4>
+        <p>Output is built to support a decision. Clear argument, the numbers behind it, and an honest read on what could go wrong.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-num">04</span>
+      <h2 class="sec-title">About <em>WB Capital</em></h2>
+    </div>
+    <div class="about-grid">
+      <div class="about reveal">
+        <p>WB Capital was founded to do one thing well: produce rigorous, source-led research across real estate and finance. The work draws on training in property valuation, real estate financial modelling and investment analysis, applied to live UK markets.</p>
+        <p>We are deliberately narrow. <strong>We research and analyse. We do not manage money, raise capital, or carry out regulated investment activity.</strong> That focus is what lets the work stay independent and the reasoning stay honest.</p>
+        <p>The aim is research that genuinely sharpens a decision, not analysis for its own sake.</p>
+      </div>
+      <div class="about-card reveal d1">
+        <div class="lbl">At a glance</div>
+        <div class="row"><div class="t">Independent</div><div class="d">No house position to defend</div></div>
+        <div class="row"><div class="t">Research-led</div><div class="d">Unregulated analysis and advisory support</div></div>
+        <div class="row"><div class="t">UK-focused</div><div class="d">Real estate first, finance throughout</div></div>
+        <div class="row"><div class="t">Source-driven</div><div class="d">Public data, transparent method</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <h2 class="reveal">Have a market or asset <em>worth a look?</em></h2>
+    <p class="reveal d1">We are happy to talk through a brief, a sector, or a piece of analysis. Reach out and we will come back with a straight answer on whether we can help.</p>
+    <a href="https://www.linkedin.com/company/wb-capital-limited/" target="_blank" rel="noopener" class="mail reveal d2">Connect on LinkedIn</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <img class="foot-logo" src="data:image/png;base64,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" alt="WB Capital">
+        <span>Independent research and analysis across real estate, digital infrastructure and the capital markets.</span>
+      </div>
+      <div class="foot-cols">
+        <div class="foot-col">
+          <h5>Navigate</h5>
+          <a href="#work">Capabilities</a>
+          <a href="#coverage">Coverage</a>
+          <a href="#approach">Approach</a>
+          <a href="#about">About</a>
+        </div>
+        <div class="foot-col">
+          <h5>Contact</h5>
+          <a href="https://www.linkedin.com/company/wb-capital-limited/" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <div>© <span id="yr"></span> WB Capital Limited. All rights reserved.</div>
+      <div class="disc">WB Capital provides research, analysis and unregulated advisory support only. It does not provide regulated financial advice, manage investments, or carry out regulated activity. Nothing on this site is an offer, recommendation or investment advice.</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  },{threshold:.14});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
